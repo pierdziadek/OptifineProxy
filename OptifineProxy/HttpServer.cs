@@ -48,7 +48,7 @@ namespace OptifineProxy {
             for (int i = 0; i < form1.tbNicknameColumn.Length; i++) {
                 if(form1.tbNicknameColumn[i].Text.Equals(nickname)) {
                     string capeName = form1.tbCapeColumn[i].Text;
-                    string path = @"C:\Users\piotr\Desktop\Capes Resources\" + capeName + @".png";
+                    string path = form1.tbResourcesDirectory.Text + @"\" + capeName + @".png";
                     output = File.ReadAllBytes(path);
                     return output;
                 }

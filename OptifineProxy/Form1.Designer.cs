@@ -479,10 +479,10 @@ namespace OptifineProxy {
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private MaterialSingleLineTextField tbResourcesDirectory;
         private System.Windows.Forms.Label lblResources;
         private System.Windows.Forms.Label lblServer;
         private MaterialFlatButton btnDestruct;
+        public MaterialSingleLineTextField tbResourcesDirectory;
     }
 }
 
