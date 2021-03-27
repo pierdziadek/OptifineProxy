@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace OptifineProxy {
     static class Program {
-        public static string currentVersion = "v1.1*";
+        public static string currentVersion = "v1.1.3";
         /// <summary>
         /// Główny punkt wejścia dla aplikacji.
         /// </summary>
