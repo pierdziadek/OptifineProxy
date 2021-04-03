@@ -14,7 +14,7 @@ namespace OptifineProxy {
     public partial class Form1 : MaterialSkin.Controls.MaterialForm {
         public Form1() {
             InitializeComponent();
-
+            
             MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -25,7 +25,7 @@ namespace OptifineProxy {
                 TextShade.WHITE
             );
 
-            tbResourcesDirectory.Text = "C:\\Users\\" + Environment.UserName + "\\Desktop\\Capes Resources";
+            tbResourcesDirectory.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Capes Resources";
 
             for (int i = 0; i < tbNicknameColumn.Length; i++) {
                 tbNicknameColumn[i] = new MaterialSingleLineTextField();
@@ -85,6 +85,12 @@ namespace OptifineProxy {
             cbEnabledColumn[0].Checked = true;
             tbNicknameColumn[0].Text = "pierdziadek";
             tbCapeColumn[0].Text = "2016";
+            cbStartup.Checked = Startup.isStartupItem();
+            if (Program.args.Length > 0 && Program.args[0] == "-minimized") {
+                Hide();
+                WindowState = FormWindowState.Minimized;
+                ShowInTaskbar = false;
+            }
         }
 
         private void materialRadioButton2_CheckedChanged(object sender, EventArgs e) {
@@ -100,7 +106,7 @@ namespace OptifineProxy {
             }
         }
 
-        private void materialFlatButton2_Click(object sender, EventArgs e) {
+        public void materialFlatButton2_Click(object sender, EventArgs e) {
             lblStatus.Text = "Status: ENABLED";
             lblStatus.ForeColor = Color.Green;
             if (rbServerLocal.Checked) HostsChange.load("127.0.0.1");
@@ -121,6 +127,39 @@ namespace OptifineProxy {
         private void btnDestruct_Click(object sender, EventArgs e) {
             HostsChange.unload();
             btnDisable.PerformClick();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+            try {
+                Configuration.save();
+            } catch (Exception) { }
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            try {
+                Configuration.load();
+            } catch (Exception) { }
+            Logs.WriteLine("Application started!");
+        }
+
+        private void Form1_Resize(object sender, EventArgs e) {
+            if (WindowState == FormWindowState.Minimized) {
+                Hide();
+                notifyIcon1.Visible = true;
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e) {
+            Show();
+            WindowState = FormWindowState.Normal;
+            notifyIcon1.Visible = false;
+            ShowInTaskbar = true;
+        }
+
+        private void cbStartup_CheckedChanged(object sender, EventArgs e) {
+            MaterialCheckBox cb = (MaterialCheckBox)sender;
+            if (cb.Checked) Startup.add();
+            else Startup.remove();
         }
     }
 }

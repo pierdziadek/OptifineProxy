@@ -16,13 +16,18 @@ namespace OptifineProxy {
         public static void start() {
             listener.Prefixes.Add("http://s.optifine.net/");
             listener.Start();
+            Logs.WriteLine("HTTP server started!");
             while (running) {
                 HttpListenerContext context = listener.GetContext();
                 HttpListenerRequest request = context.Request;
-                Console.WriteLine(request.RawUrl);
-                
-                String regex = @"\/capes/(?<nickname>(.+)).png";
+
+                if (request.RawUrl == "/users/") continue;
+                String regex = @"\/(?<requesttype>(.+))/(?<nickname>(.+)).(?<filetype>(...))";
                 string nickname = Regex.Replace(request.RawUrl, regex, "${nickname}");
+                string requesttype = Regex.Replace(request.RawUrl, regex, "${requesttype}");
+                string filetype = Regex.Replace(request.RawUrl, regex, "${filetype}");
+                Console.WriteLine(request.RawUrl + " " + nickname + " " + requesttype);
+                Logs.WriteLine("Request for " + requesttype +  " " + nickname);
 
                 HttpListenerResponse response = context.Response;
                 byte[] buffer = responseCape(nickname);
@@ -37,11 +42,9 @@ namespace OptifineProxy {
             }
             listener.Stop();
         }
-
         public static void stop() {
             running = false;
         }
-
         private static byte[] responseCape(String nickname) {
             byte[] output;
             Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();

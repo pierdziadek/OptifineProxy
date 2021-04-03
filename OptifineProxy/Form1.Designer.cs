@@ -1,5 +1,6 @@
 ﻿
 using MaterialSkin.Controls;
+using System.Drawing;
 
 namespace OptifineProxy {
     partial class Form1 {
@@ -26,6 +27,8 @@ namespace OptifineProxy {
         /// jej zawartości w edytorze kodu.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableCapes = new System.Windows.Forms.TableLayoutPanel();
@@ -33,6 +36,7 @@ namespace OptifineProxy {
             this.lblTableNickname = new MaterialSkin.Controls.MaterialLabel();
             this.lblTableCape = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cbStartup = new MaterialSkin.Controls.MaterialCheckBox();
             this.btnDestruct = new MaterialSkin.Controls.MaterialFlatButton();
             this.lblResources = new System.Windows.Forms.Label();
             this.lblServer = new System.Windows.Forms.Label();
@@ -44,6 +48,7 @@ namespace OptifineProxy {
             this.btnEnable = new MaterialSkin.Controls.MaterialFlatButton();
             this.btnDisable = new MaterialSkin.Controls.MaterialFlatButton();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,10 +57,13 @@ namespace OptifineProxy {
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tabSelector = new MaterialSkin.Controls.MaterialTabSelector();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.tbLogs = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableCapes.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +71,7 @@ namespace OptifineProxy {
             // 
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage4);
             this.tabControl.Controls.Add(this.tabPage3);
             this.tabControl.Depth = 0;
             this.tabControl.Location = new System.Drawing.Point(-1, 89);
@@ -157,6 +166,7 @@ namespace OptifineProxy {
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.cbStartup);
             this.tabPage2.Controls.Add(this.btnDestruct);
             this.tabPage2.Controls.Add(this.lblResources);
             this.tabPage2.Controls.Add(this.lblServer);
@@ -174,6 +184,23 @@ namespace OptifineProxy {
             this.tabPage2.Size = new System.Drawing.Size(543, 337);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
+            // 
+            // cbStartup
+            // 
+            this.cbStartup.AutoSize = true;
+            this.cbStartup.Depth = 0;
+            this.cbStartup.Font = new System.Drawing.Font("Roboto", 10F);
+            this.cbStartup.Location = new System.Drawing.Point(181, 209);
+            this.cbStartup.Margin = new System.Windows.Forms.Padding(0);
+            this.cbStartup.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.cbStartup.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cbStartup.Name = "cbStartup";
+            this.cbStartup.Ripple = true;
+            this.cbStartup.Size = new System.Drawing.Size(190, 30);
+            this.cbStartup.TabIndex = 15;
+            this.cbStartup.Text = "Start minimzed on startup";
+            this.cbStartup.UseVisualStyleBackColor = true;
+            this.cbStartup.CheckedChanged += new System.EventHandler(this.cbStartup_CheckedChanged);
             // 
             // btnDestruct
             // 
@@ -197,7 +224,7 @@ namespace OptifineProxy {
             this.lblResources.AutoSize = true;
             this.lblResources.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblResources.ForeColor = System.Drawing.Color.Black;
-            this.lblResources.Location = new System.Drawing.Point(177, 141);
+            this.lblResources.Location = new System.Drawing.Point(177, 129);
             this.lblResources.Name = "lblResources";
             this.lblResources.Size = new System.Drawing.Size(184, 23);
             this.lblResources.TabIndex = 13;
@@ -218,7 +245,7 @@ namespace OptifineProxy {
             // 
             this.tbResourcesDirectory.Depth = 0;
             this.tbResourcesDirectory.Hint = "";
-            this.tbResourcesDirectory.Location = new System.Drawing.Point(8, 167);
+            this.tbResourcesDirectory.Location = new System.Drawing.Point(8, 155);
             this.tbResourcesDirectory.MouseState = MaterialSkin.MouseState.HOVER;
             this.tbResourcesDirectory.Name = "tbResourcesDirectory";
             this.tbResourcesDirectory.PasswordChar = '\0';
@@ -235,7 +262,7 @@ namespace OptifineProxy {
             this.btnResourcesDirectory.AutoSize = true;
             this.btnResourcesDirectory.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnResourcesDirectory.Depth = 0;
-            this.btnResourcesDirectory.Location = new System.Drawing.Point(469, 161);
+            this.btnResourcesDirectory.Location = new System.Drawing.Point(469, 149);
             this.btnResourcesDirectory.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnResourcesDirectory.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnResourcesDirectory.Name = "btnResourcesDirectory";
@@ -344,6 +371,16 @@ namespace OptifineProxy {
             this.lblStatus.TabIndex = 9;
             this.lblStatus.Text = "Status: DISABLED";
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.tbLogs);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(543, 337);
+            this.tabPage4.TabIndex = 2;
+            this.tabPage4.Text = "Logs";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.label4);
@@ -352,7 +389,7 @@ namespace OptifineProxy {
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(543, 337);
-            this.tabPage3.TabIndex = 2;
+            this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Credits";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
@@ -430,6 +467,24 @@ namespace OptifineProxy {
             this.tabSelector.TabIndex = 5;
             this.tabSelector.Text = "materialTabSelector1";
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.BalloonTipTitle = "OptifineProxy";
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "OptifineProxy";
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
+            // tbLogs
+            // 
+            this.tbLogs.BackColor = System.Drawing.Color.White;
+            this.tbLogs.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbLogs.Location = new System.Drawing.Point(6, 22);
+            this.tbLogs.Multiline = true;
+            this.tbLogs.Name = "tbLogs";
+            this.tbLogs.ReadOnly = true;
+            this.tbLogs.Size = new System.Drawing.Size(534, 346);
+            this.tbLogs.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,16 +492,22 @@ namespace OptifineProxy {
             this.ClientSize = new System.Drawing.Size(543, 450);
             this.Controls.Add(this.tabSelector);
             this.Controls.Add(this.tabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Sizable = false;
             this.Text = "Optifine Proxy Menu";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tableCapes.ResumeLayout(false);
             this.tableCapes.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
@@ -462,9 +523,6 @@ namespace OptifineProxy {
         public MaterialSingleLineTextField[] tbNicknameColumn = new MaterialSingleLineTextField[12];
         public MaterialSingleLineTextField[] tbCapeColumn = new MaterialSingleLineTextField[12];
         public MaterialCheckBox[] cbEnabledColumn = new MaterialCheckBox[12];
-        private MaterialSkin.Controls.MaterialSingleLineTextField tbServerIP;
-        private MaterialSkin.Controls.MaterialRadioButton rbServerRemote;
-        private MaterialSkin.Controls.MaterialRadioButton rbServerLocal;
         private MaterialSkin.Controls.MaterialFlatButton btnResourcesDirectory;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TableLayoutPanel tableCapes;
@@ -472,7 +530,6 @@ namespace OptifineProxy {
         private MaterialSkin.Controls.MaterialLabel lblTableCape;
         private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField3;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
-        private MaterialSkin.Controls.MaterialFlatButton btnEnable;
         private MaterialSkin.Controls.MaterialFlatButton btnDisable;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.TabPage tabPage3;
@@ -483,6 +540,14 @@ namespace OptifineProxy {
         private System.Windows.Forms.Label lblServer;
         private MaterialFlatButton btnDestruct;
         public MaterialSingleLineTextField tbResourcesDirectory;
+        public MaterialSingleLineTextField tbServerIP;
+        public MaterialRadioButton rbServerRemote;
+        public MaterialRadioButton rbServerLocal;
+        public MaterialFlatButton btnEnable;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private MaterialCheckBox cbStartup;
+        private System.Windows.Forms.TabPage tabPage4;
+        public System.Windows.Forms.TextBox tbLogs;
     }
 }
 

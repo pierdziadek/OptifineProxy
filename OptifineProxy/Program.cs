@@ -9,12 +9,16 @@ using System.Windows.Forms;
 
 namespace OptifineProxy {
     static class Program {
-        public static string currentVersion = "v1.1.3";
+        public static string currentVersion = "v1.2";
+        public static string configVersion = "1";
+        public static JObject json = new JObject();
+        public static string[] args;
         /// <summary>
         /// Główny punkt wejścia dla aplikacji.
         /// </summary>
         [STAThread]
-        static void Main() {
+        static void Main(string[] args) {
+            Program.args = args;
             string s = downloadInfo();
             if(getInformations(s, "tag_name") != currentVersion)
                 MessageBox.Show("New version available! Download it from:\n" +
